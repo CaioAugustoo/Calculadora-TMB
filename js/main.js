@@ -14,7 +14,7 @@ const $gainWeight = document.querySelector('[data-js="gain-weight"]');
 $form.addEventListener("submit", app, false);
 $btnToBack.addEventListener("submit", backToForm, false);
 
-function app(e) {
+const app = (e) => {
   e.preventDefault();
   $metabolismo.value = calculatorTbm(getRadioValue());
   $keepWeight.value = keepWeight();
@@ -24,14 +24,13 @@ function app(e) {
   document.querySelector("#togle-result").classList.remove("disable");
 }
 
-function backToForm(e) {
+const backToForm = (e) => {
   e.preventDefault();
-  console.log("ola");
   document.querySelector("#togle").classList.remove("disable");
   document.querySelector("#togle-result").classList.add("disable");
 }
 
-function getRadioValue() {
+const getRadioValue = () => {
   for (var i = 0, l = $gender.length; i < l; i++) {
     if ($gender[i].checked) {
       return $gender[i].value;
@@ -39,7 +38,7 @@ function getRadioValue() {
   }
 }
 
-function calculatorTbm(genderValue) {
+const calculatorTbm = (genderValue) => {
   if (genderValue === "man") {
     return Math.round(
       66 + 13.7 * $weight.value + 5 * $height.value - 6.8 * $age.value
@@ -57,14 +56,14 @@ const activityLevel = {
   pesado: 1.725,
 };
 
-function keepWeight() {
+const keepWeight = () => {
   return Math.ceil(activityLevel[$level.value] * $metabolismo.value);
 }
 
-function loseWeigth() {
+const loseWeigth = () => {
   return Math.round(Number($keepWeight.value) - 0.15 * $keepWeight.value);
 }
 
-function gainWeight() {
+const gainWeight = () => {
   return Math.round(Number($keepWeight.value) + 0.15 * $keepWeight.value);
 }
